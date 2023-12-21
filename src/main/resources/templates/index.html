@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- sec2 Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- sec2 Section End -->
+
+
+<main>
+    <div class="container-fluid mb-5 " style="text-align: center" >
+        <h1 ></h1>
+        <h1 ></h1>
+    </div>
+    <div class="container-fluid mb-5 " style="text-align: center" >
+        <h1 ></h1>
+    </div>
+    <div class="container-fluid mb-5 " style="text-align: center" >
+        <h1 ></h1>
+    </div>
+
+    <div class="container-fluid mb-5 " style="text-align: center" >
+        <h1 class="display-2"><p class="title is-1 is-spaced text-info">Reserve your appointment with a doctor using</p></h1>
+    </div>
+
+    <div class="container-fluid mb-5" style="text-align: center">
+        <h1 class="display-2"><p class="title is-1 is-spaced text-info">  </p></h1>
+    </div>
+
+
+    <div class="container-fluid mb-5" style="text-align: center">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/map}">
+                <img class="img-fluid" th:src="@{/images/MAP.jpg}" alt=""> <h2 class="display-5"><p class="title is-1 is-spaced text-info">MAP</p></h2>
+
+            </a>
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}">
+                <img class="img-fluid" th:src="@{/images/hospital.jpg}" alt=""> <h2 class="display-5"><p class="title is-1 is-spaced text-info">INSTITUTION'S NAME</p></h2>
+
+            </a>
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}">
+                <img class="img-fluid" th:src="@{/images/doctor.jpg}" alt=""> <h2 class="display-5"><p class="title is-1 is-spaced text-info">DOCTOR'S NAME</p></h2>
+
+            </a>
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/specialization}">
+                <img class="img-fluid" th:src="@{/images/specialization.jpg}" alt=""> <h2 class="display-5"><p class="title is-1 is-spaced text-info">SPECIALIZATION</p></h2>
+
+            </a>
+
+
+        </div>
+    </div>
+
+    <div class="container-fluid mb-5" style="text-align: center">
+        <h1 class="display-5"><p class="title is-1 is-spaced text-secondary"> Bringing healthcare within reach, we specialize in connecting individuals with trusted doctors abroad, ensuring global access to quality medical expertise. </p></h1>
+    </div>
+
+</main>
+
+<!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+</body>
+</html>

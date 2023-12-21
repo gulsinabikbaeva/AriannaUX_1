@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav_seller"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+
+<main>
+
+
+    <li  sec:authorize="isAuthenticated()"  >
+
+        <h1 th:text="${'Ciao ' + user.getFirstname() +'!'}"></h1>
+
+
+
+    </li>
+
+
+     </main>
+
+     <!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+</body>
+</html>

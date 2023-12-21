@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav_admin"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+
+<main>
+
+    <li sec:authorize="isAuthenticated()">
+
+        <h1 th:text="${'Ciao ' + user.getFirstname() +'!'}"></h1>
+
+
+        <h2>List of orders by sellers: </h2>
+
+        <div class="row">
+            <div class="col-4"><a> <input class="form-control" type="search" placeholder="Search seller through Email" aria-label="Search" id="search-input"></a></div>
+            <div class="col-4"><a> <input class="form-control" type="search" placeholder="Filter by Year" aria-label="Search" id="filter-year"></a></div>
+            <div class="col-4" style="padding-top: 0.5rem;"><a>  <input class="btn btn-primary offset-sm-2" type="submit" value="Submit" ></a> </div>
+        </div>
+        <table class="table test">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cognome</th>
+                <th scope="col">tel</th>
+                <th scope="col">subTotale</th>
+                <th scope="col">Totale</th>
+                <th scope="col">Paese</th>
+                <th scope="col">Citta'</th>
+                <th scope="col">ZIP</th>
+                <th scope="col">Street</th>
+                <th scope="col">HouseNumber</th>
+            </tr>
+            </thead>
+
+            <th:block th:each="seller : ${sellers}">
+                <tbody>
+                <tr>
+                    <td><a th:href="@{/orders}" ><p  th:text="${seller.getUsername()}"></p></a></td>
+                    <td><p  th:text="${seller.getFirstname()}"></p></td>
+                    <td><p  th:text="${seller.getLastname()}"></p></td>
+                    <td><p th:text="${seller.getPhone()}"></p></td>
+                    <td><p> get subtotal</p></td>
+                    <td><p> get total </p></td>
+                    <td><p  th:text="${seller.getCountry()}"></p></td>
+                    <td><p  th:text="${seller.getTowncity()}"></p></td>
+                    <td><p  th:text="${seller.getZip()}"></p></td>
+                    <td><p  th:text="${seller.getStreet()}"></p></td>
+                    <td><p  th:text="${seller.getHouseNumber()}"></p></td>
+                </tr>
+                </tbody>
+            </th:block>
+        </table>
+
+        <h2>List of sellers: </h2>
+
+        <th:block th:each="seller : ${sellers}">
+            <p  th:text="${seller.getFirstname()}"></p>
+        </th:block>
+
+
+        <a><h2>List of orders by buyers: </h2></a>
+
+        <div class="row">
+            <div class="col-4"><a> <input class="form-control" type="search" placeholder="Search buyer through Email" aria-label="Search" id="search-input"></a></div>
+            <div class="col-4"><a> <input class="form-control" type="search" placeholder="Filter by Year" aria-label="Search" id="filter-year"></a></div>
+            <div class="col-4" style="padding-top: 0.5rem;"><a>  <input class="btn btn-primary offset-sm-2" type="submit" value="Submit" ></a> </div>
+        </div>
+        <table class="table test">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cognome</th>
+                <th scope="col">tel</th>
+                <th scope="col">subTotale</th>
+                <th scope="col">Totale</th>
+                <th scope="col">Paese</th>
+                <th scope="col">Citta'</th>
+                <th scope="col">ZIP</th>
+                <th scope="col">Street</th>
+                <th scope="col">HouseNumber</th>
+            </tr>
+            </thead>
+
+            <th:block th:each="buyer : ${buyers}">
+                <tbody>
+                <tr>
+                    <td><a th:href="@{/orders}" ><p  th:text="${buyer.getUsername()}"></p></a></td>
+                    <td><p  th:text="${buyer.getFirstname()}"></p></td>
+                    <td><p  th:text="${buyer.getLastname()}"></p></td>
+                    <td><p th:text="${buyer.getPhone()}"></p></td>
+                    <td><p> get subtotal</p></td>
+                    <td><p> get total </p></td>
+                    <td><p  th:text="${buyer.getCountry()}"></p></td>
+                    <td><p  th:text="${buyer.getTowncity()}"></p></td>
+                    <td><p  th:text="${buyer.getZip()}"></p></td>
+                    <td><p  th:text="${buyer.getStreet()}"></p></td>
+                    <td><p  th:text="${buyer.getHouseNumber()}"></p></td>
+                </tr>
+                </tbody>
+            </th:block>
+        </table>
+
+        <h2>List of buyers: </h2>
+
+        <th:block th:each="buyer : ${buyers}">
+            <p  th:text="${buyer.getFirstname()}"></p>
+        </th:block>
+
+<!--        <a class="item" th:href="@{/sellers}">sellers</a></li>-->
+<!--    <a class="item" th:href="@{/users}">users</a></li>-->
+
+    </li>
+
+
+</main>
+
+<!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+<script>
+    var addNumeration = function(cl){
+        var table = document.querySelector('table.' + cl)
+        var trs = table.querySelectorAll('tr')
+        var counter = 1
+
+        Array.prototype.forEach.call(trs, function(x,i){
+            var firstChild = x.children[0]
+            if (firstChild.tagName === 'TD') {
+                var cell = document.createElement('td')
+                cell.textContent = counter ++
+                x.insertBefore(cell,firstChild)
+            } else {
+                firstChild.setAttribute('colspan',2)
+            }
+        })
+    }
+
+    addNumeration("test")
+</script>
+
+</body>
+</html>

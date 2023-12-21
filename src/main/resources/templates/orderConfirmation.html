@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+
+<main>
+
+    <div class="container-fluid mb-5" style="text-align: center">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/specialization}">
+                <img class="img-fluid" th:src="@{/images/cerca1.png}" alt=""> <h5 class="display-5"><p class="title is-1 is-spaced text-link">CHOOSE THE SERVICE</p></h5>
+                <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/ok.jpg}" alt=""> </a>
+            </a>
+
+            <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/freccia1.png}" alt=""> </a>
+
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/cart}">
+                <img class="img-fluid" th:src="@{/images/aggiungi1.png}" alt=""> <h5 class="display-5"><p class="title is-1 is-spaced text-link">CONFIRM THE LIST</p></h5>
+                <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/ok.jpg}" alt=""> </a>
+
+            </a>
+
+            <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/freccia1.png}" alt=""> </a>
+
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/checkout}">
+                <img class="img-fluid" th:src="@{/images/paga1.png}" alt=""> <h5 class="display-5"><p class="title is-1 is-spaced text-link">PAY</p></h5>
+                <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/ok.jpg}" alt=""> </a>
+
+            </a>
+
+            <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/freccia1.png}" alt=""> </a>
+
+            <a class="navbar-brand" >
+                <img class="img-fluid" th:src="@{/images/appunta1.png}" alt=""> <h5 class="display-5"><p class="title is-1 is-spaced text-link">WAIT FOR THE CONFIRMATION</p></h5>
+                <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/ok.jpg}" alt=""> </a>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="container-fluid mb-5" style="text-align: center">
+    <p></p>
+
+    <h2>Thank you for your order!</h2>
+    <h4>We have sent you an email with order details.</h4>
+    <h4>Once it is confirmed we will sent you the notification with further details and identification number.</h4>
+    </div>
+     </main>
+
+     <!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+
+<main>
+    <section>
+        <div class="container-fluid"><h2> Prenotazioni </h2>
+
+            <section class="row" th:with="items=${user.getOrders()}" >
+                <th:block th:fragment="articles(items)" th:unless="${#lists.isEmpty(items)}">
+                    <!-- ordersVisualization Section Begin -->
+                    <div th:replace="fragments :: ordersVisualization"></div>
+                    <!-- ordersVisualization Section End -->
+                </th:block>
+                <article class="col-md-12" th:if="${#lists.isEmpty(items)}" style="height:100px">Nessuna prenotazione. </article>
+            </section>
+
+        </div>
+    </section>
+</main>
+
+     <!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+<!-- head Section Begin -->
+<head th:fragment="head" class="head">
+
+    <title>ARIANNA connect me</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/open-iconic-bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+
+    <link rel="stylesheet" th:href="@{/css/aos.css}">
+
+    <link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}">
+
+
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/icomoon.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<!-- head Section End -->
+
+<!-- Navbar Section Begin -->
+<nav th:fragment="nav" class="nav">
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" style="width: 100%;">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}">
+                <img class="img-fluid" th:src="@{/images/Arianna4.jpg}" alt="">
+
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;">
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;">
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/htw}"><p class="text-success">How it works</p></a>
+                    </li>
+
+
+                    </li>
+                    <li class="nav-item" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()" th:if="${user.isBuyer()}">
+                        <a class="navbar-brand" th:href="@{/orders}">Prenotazioni</a>
+                    </li>
+
+
+
+                    <li class="nav-item" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()" >
+                        <a class="navbar-brand" th:href="@{/myProfile}"><i class="icon-person" aria-hidden="true"></i></a>
+
+                    </li>
+
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()" th:if="${user.isSeller()}" >
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/item/new' ? 'active':''}" th:href="@{/item/new}">Nuovo servizio</a>
+                    </li>
+
+
+                    <li class="nav-item" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" style="padding-left: 1rem;" sec:authentication="name"></a>
+                    </li>
+
+
+                    <li class="nav-item" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" th:href="@{/favorites}"><i class="icon-heart color-danger" aria-hidden="true"></i></a>
+                    </li>
+
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;"  sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" th:unless="${user.isSeller() or user.isAdmin()}" th:href="@{/cart}"><i class="icon-account_balance_wallet" aria-hidden="true"></i></a>
+                    </li>
+
+
+                    <li class="nav-item active" sec:authorize="!isAuthenticated()" style="font-family:monospace; padding-top: 0.5rem;">
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}" th:href="@{/login} ">Login</a>
+                    </li>
+
+
+
+                    <!-- Fine bottone di log in -->
+                    <li class="nav-item active" sec:authorize="!isAuthenticated()" style="font-family:monospace; padding-top: 0.5rem;">
+                        <a class="navbar-brand" th:href="@{/register}">Register</a>
+                    </li>
+
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" th:href="@{/logout}">Logout</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</nav>
+<!-- Navbar Section End -->
+
+<!-- Navbar Section Begin -->
+<section th:fragment="nav_admin" class="section">
+
+    <section class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" style="width: 100%;">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}">
+                <img class="img-fluid" th:src="@{/images/Arianna4.jpg}" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;">
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}">Home</a>
+                    </li>
+
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()" th:if="${user.isAdmin()}" >
+                        <a class="navbar-brand" th:href="@{/sellers}">Sellers</a>
+                    </li>
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()" th:if="${user.isAdmin()}" >
+                        <a class="navbar-brand" th:href="@{/buyers}">Buyers</a>
+                    </li>
+
+
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()" th:if="${user.isSeller()}" >
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/item/new' ? 'active':''}" th:href="@{/item/new}">Nuovo annuncio</a>
+                    </li>
+
+                    <li class="nav-item" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" style="padding-left: 1rem;" sec:authentication="name"></a>
+                    </li>
+
+
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" th:href="@{/logout}">Logout</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</section>
+<!-- Navbar Section End -->
+
+<!-- Navbar Section Begin -->
+<section th:fragment="nav_seller" class="section">
+
+    <section class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" style="width: 100%;">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}">
+                <img class="img-fluid" th:src="@{/images/Arianna4.jpg}" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;">
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}">Home</a>
+                    </li>
+
+                    <li class="nav-item" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()" >
+                        <a class="navbar-brand" th:href="@{/orders}">Prenotazioni</a>
+                    </li>
+
+
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()" th:if="${user.isSeller()}" >
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/item/new' ? 'active':''}" th:href="@{/item/new}">Nuovo servizio</a>
+                    </li>
+
+                    <li class="nav-item" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" style="padding-left: 1rem;" sec:authentication="name"></a>
+                    </li>
+
+
+                    <li class="nav-item" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" th:href="@{/favorites}"><i class="icon-heart color-danger" aria-hidden="true"></i></a>
+                    </li>
+
+                    <li class="nav-item active" style="font-family:monospace; padding-top: 0.5rem;" sec:authorize="isAuthenticated()">
+                        <a class="navbar-brand" th:href="@{/logout}">Logout</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</section>
+<!-- Navbar Section End -->
+
+<!-- Section Section Begin -->
+<section th:fragment="sec2" class="section">
+
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4"></h2>
+                <p></p>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4"></h2>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+<!-- Section Section End -->
+
+<!-- Section Section Begin -->
+<section th:fragment="sec1" class="section">
+
+    <section id="home-section" class="hero">
+        <div class="home-slider owl-carousel">
+            <div class="slider-item js-fullheight">
+                <div class="overlay"></div>
+                <div class="container-fluid p-0">
+                    <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
+                        <img class="one-third order-md-last img-fluid" th:src="@{/images/Arianna logo.jpg}" alt="">
+                        <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                            <div class="text">
+                                <span class="subheading">A1 bgdhejhdncolin</span>
+                                <div class="horizontal">
+                                    <h1 class="mb-4 mt-3">A2 uiehbckhcih</h1>
+                                    <p class="mb-4">A3 uicgeihcehc</p>
+
+                                    <p><a href="#" class="btn-custom">A4 guiefgciuecik</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="slider-item js-fullheight">
+                <div class="overlay"></div>
+                <div class="container-fluid p-0">
+                    <div class="row d-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
+                        <img class="one-third order-md-last img-fluid" th:src="@{/images/Arianna logo.jpg}" alt="">
+                        <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                            <div class="text">
+                                <span class="subheading">B1 gugducbdkcb</span>
+                                <div class="horizontal">
+                                    <h1 class="mb-4 mt-3">B2 gibdkjbk</h1>
+                                    <p class="mb-4">B3 gbuicdcb</p>
+
+                                    <p><a href="#" class="btn-custom">B4 vbdkbkdj</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</section>
+<!-- Section Section End -->
+
+<!-- ordersVisualization Section Begin -->
+<section th:fragment="ordersVisualization" class="section">
+
+    <div class="container-fluid">
+            <article class="col" th:each="item : ${items}" th:fragment="orderCard(item)">
+
+                 <h3><a class sec:authorize="isAuthenticated()"><h3> Data ed ora della prenotazione: </h3><span th:text="${item.getDate()}" alt=""></span></a></h3>
+
+
+                    <div class="row" style=" padding: 2vh 0;" th:each="item1 : ${item.getItems()}" th:fragment="itemCard(item1)">
+
+                        <div class=" rounded-3 mb-4">
+                            <div class="card-body p-4">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-md-2 col-lg-2 col-xl-2">
+                                        <img class="img-fluid rounded-3"  th:src="@{'/item/'+${item1.id}+'/image'}" alt="">
+
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-3" >
+                                        <a th:href="@{'/item/'+${item1.id}}"><span>
+                                                        <p class="lead fw-normal mb-2" th:text="${item1.title}" >title</p>
+                                                        </span></a>
+                                    </div>
+
+                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                        <h5 class="mb-0"><a>&euro;<span class="price" th:text="${item1.price}">xx</span></a></h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+
+
+            </article>
+
+     </div>
+     <article class="col-md-12" th:if="${#lists.isEmpty(items)}" style="height:100px">Nessun ordine per ora.</article>
+
+ </section>
+ <!-- ordersVisualization Section End -->
+
+<!-- itemVisualization Section Begin -->
+<section th:fragment="itemVisualization" class="section">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <article class="col-md-4 col-lg-2 ftco-animate d-flex" th:each="item : ${items}" th:fragment="itemCard(item)">
+                            <div class="card product d-flex flex-column">
+                                <a th:href="@{'/item/'+${item.id}}" class="img-prod"><img class="img-fluid" th:src="@{'/item/'+${item.id}+'/image'}" alt="">
+
+                                    <div class="overlay"></div>
+                                </a>
+                                <div class="text py-3 pb-4 px-3">
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col" style="text-align: left"><h3><a><span th:text="${item.title}">xxx</span></a></h3></div>
+                                            <div class="col" style="text-align: left"><h3><a><span th:if="${item.isAvailable()}" style="color: darkgreen;" >Disponibile</span></a></h3>
+                                                <h3><a><span th:unless="${item.isAvailable()}" style="color: darkcyan;">Non disponibile</span></a></h3></div>
+                                        </div>
+                                    </div>
+
+                                    <p class="bottom-area d-flex px-3">
+                                        <a class="add-to-cart text-center py-2 mr-1" th:href="@{'/item/'+${item.id}}"><span>Dettagli</span></a>
+
+                                        <a sec:authorize="isAuthenticated()" th:if="${(!#arrays.contains(user.getFavorites(),item))}" th:href="@{'/favorite/addFavorite/'+${item.id}}" class="add-to-cart text-center py-2 mr-1"><span>Add to <i class="icon-heart color-danger" aria-hidden="true"></i></span></a>
+                                        <a sec:authorize="isAuthenticated()" th:if="${(#arrays.contains(user.getFavorites(), item))}" th:href="@{'/favorite/removeFavorite/'+${item.id}}" class="add-to-cart text-center py-2 mr-1"><span>Remove from <i class="icon-heart color-danger" aria-hidden="true"></i></span></a>
+                                        <a sec:authorize="!isAuthenticated()"  class="add-to-cart text-center py-2 mr-1" th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}" th:href="@{/login} "><span>Add to <i class="icon-heart color-danger" aria-hidden="true"></i></span></a>
+
+                                        <a sec:authorize="isAuthenticated()" th:if="${item.isAvailable()}" th:unless="${user.isSeller() or user.isAdmin()}" th:href="@{'/cart/addItemToCart/'+${item.id}}"  class="buy-now text-center py-2"><span>Prenota</span></a>
+                                        <a sec:authorize="isAuthenticated()" th:unless="${user.isSeller() or user.isAdmin() or item.isAvailable()}" th:href="@{'/cart/addItemToCart/'+${item.id}}"  class="buy-now text-center py-2"><span>Prenota</span></a>
+                                        <a sec:authorize="!isAuthenticated()"  class="buy-now text-center py-2" th:if="${item.isAvailable()}" th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}" th:href="@{/login} "><span>Prenota</span></a>
+
+
+                                    </p>
+                                </div>
+
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+                <article class="col-md-12" th:if="${#lists.isEmpty(items)}" style="height:100px">Nessun servizio per ora.</article>
+
+</section>
+<!-- itemVisualization Section End -->
+
+<!-- Insta Section Begin -->
+<section th:fragment="insta" class="section">
+
+    <section class="ftco-gallery">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 heading-section text-center mb-4 ftco-animate">
+                    <h2 class="mb-4 text-primary">Follow Us On Instagram</h2>
+                    <p>Our Health Is Our Wealth</p>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid px-0">
+            <div class="row no-gutters">
+                <div class="col-md-4 col-lg-2 ftco-animate">
+                    <a th:href="@{/images/1.jpg}" class="gallery image-popup img d-flex align-items-center"
+                       th:style="'background-image:url(' + @{images/1.jpg} + ');'">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-instagram"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 ftco-animate">
+                    <a th:href="@{/images/5.jpg}" class="gallery image-popup img d-flex align-items-center"
+                       th:style="'background-image:url(' + @{images/5.jpg} + ');'">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-instagram"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 ftco-animate">
+                    <a th:href="@{/images/3.jpg}" class="gallery image-popup img d-flex align-items-center"
+                       th:style="'background-image:url(' + @{images/3.jpg} + ');'">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-instagram"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 ftco-animate">
+                    <a th:href="@{/images/4.jpg}" class="gallery image-popup img d-flex align-items-center"
+                       th:style="'background-image:url(' + @{images/4.jpg} + ');'">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-instagram"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 ftco-animate">
+                    <a th:href="@{/images/2.jpg}" class="gallery image-popup img d-flex align-items-center"
+                       th:style="'background-image:url(' + @{images/2.jpg} + ');'">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-instagram"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 ftco-animate">
+                    <a th:href="@{/images/6.jpg}" class="gallery image-popup img d-flex align-items-center"
+                       th:style="'background-image:url(' + @{images/6.jpg} + ');'">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-instagram"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</section>
+<!-- Insta Section End -->
+
+
+<!-- Footer Section Begin -->
+
+<footer th:fragment="footer" class="footer">
+
+    <footer class="ftco-footer ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="mouse">
+
+                    <a href="#" class="mouse-icon">
+                        <div class="mouse-wheel"><span class="icon-arrow-up"></span></div>
+                    </a>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">ARIANNA connect me</h2>
+                        <p>Our Health Is Our Wealth.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Menu</h2>
+                        <ul class="list-unstyled">
+                            <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" class="py-2 d-block">About</a></li>
+                            <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/htw}" class="py-2 d-block">How it works</a></li>
+                            <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" class="py-2 d-block">Journal</a></li>
+                            <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" class="py-2 d-block"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2"></h2>
+                        <div class="d-flex">
+                            <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                                <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" class="py-2 d-block"></a></li>
+                                <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" class="py-2 d-block"></a></li>
+                                <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" class="py-2 d-block"></a></li>
+                            </ul>
+                            <ul class="list-unstyled">
+                                <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" class="py-2 d-block"></a></li>
+                                <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" class="py-2 d-block"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ftco-footer-widget">
+                        <h2 class="ftco-heading-2">Contacts</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span
+                                        class="text">Startup Garage | Via la Santa 1, 6962 Lugano, Svizzera</span></li>
+                                <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}"><span class="icon icon-phone"></span><span class="text">349 93 00 550</span></a></li>
+                                <li><a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}"><span class="icon icon-envelope"></span> <span class="text">gulsina.bikbaeva@student.supsi.ch</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved |  <i class="icon-heart color-danger" aria-hidden="true"></i> by <a th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/}" target="_blank">GB</a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- loader -->
+        <div id="ftco-loader" class="show fullscreen">
+            <svg class="circular" width="48px" height="48px">
+                <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+                <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+            </svg>
+        </div>
+
+        <!-- Js Plugins -->
+        <script th:src="@{/js/ajaxSearch.js}"></script>
+        <script th:src="@{/js/ajaxSubCategory.js}"></script>
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+        <script th:src="@{/js/popper.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/jquery.easing.1.3.js}"></script>
+        <script th:src="@{/js/jquery.waypoints.min.js}"></script>
+        <script th:src="@{/js/jquery.stellar.min.js}"></script>
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+        <script th:src="@{/js/aos.js}"></script>
+        <script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+        <script th:src="@{/js/bootstrap-datepicker.js}"></script>
+        <script th:src="@{/js/scrollax.min.js}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+        <script th:src="@{/js/google-map.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
+
+
+
+    </footer>
+</footer>
+<!-- Footer Section End -->
+
+</body>
+</html>

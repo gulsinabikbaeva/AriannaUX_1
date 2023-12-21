@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- sec2 Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- sec2 Section End -->
+
+
+<main>
+    <div class="container-fluid" id="mainContainerID">
+        <p>Inserire qui dettaglio ordine</p>
+    </div>
+
+        <section class="row" th:with="items=${order.getItems()}">
+            <th:block th:fragment="articles(items)">
+                <!-- itemVisualization Section Begin -->
+                <div th:replace="fragments :: itemVisualization"></div>
+                <!-- itemVisualization Section End -->
+            </th:block>
+        </section>
+    </div>
+
+    <p>----------</p>
+
+    <div class="container-fluid">
+        <section class="row" th:fragment="">
+            <article class="col-md-8 ">
+                <h2 class="pb-4 mb-4 border-bottom" th:text="${item.title}">Item 1</h2>
+            </article>
+            <aside class="col-md-4">
+                <img class="rounded mx-auto d-block" th:src="@{'/item/'+${item.id}+'/image'}" width="100%"/>
+
+            </aside>
+        </section>
+        <hr />
+        <a th:href="@{/ordersBuyer}">Torna indietro</a>
+    </div>
+
+
+</main>
+
+<!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+</body>
+</html>

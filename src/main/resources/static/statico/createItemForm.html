@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+<body>
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+    <form action="http://isin03.dti.supsi.ch:81/template-dev/items" method="post"> <!--target="_blank"-->
+        <fieldset>
+            <legend>NUOVO item</legend>
+            <div>
+                <label for="titolo">Titolo:</label>
+                <input type="text" id="titolo" name="title">
+            </div>
+            <div>
+                <label for="autore">Autore:</label>
+                <input type="text" id="autore" name="author">
+            </div>
+            <div>
+                <label for="date">Data:</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div>
+            	<label for="categoria">Categoria:</label>
+                <select name="category" id="categoria">
+                    <option value="value1" selected="1">Veicoli</option>
+                    <option value="value2">Sport</option>
+                    <option value="value3">Libri</option>
+                </select>
+            </div>
+            <div>
+                <label for="description">Descrizione:</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+        </fieldset>
+        <input type="submit" value="CREA item">
+        <!--button name="button">CREA item</button-->
+    </form>
+
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+
+</body>
+
+</html>

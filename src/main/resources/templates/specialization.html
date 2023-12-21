@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- sec2 Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- sec2 Section End -->
+
+
+<main>
+    <div class="container-fluid mb-5 " style="text-align: center" >
+        <h1 ></h1>
+        <h1 ></h1>
+    </div>
+    <div class="container-fluid mb-5 " style="text-align: center" >
+        <h1 ></h1>
+    </div>
+    <div class="container-fluid mb-5 " style="text-align: center" >
+        <h1 ></h1>
+    </div>
+
+
+    <div class="container-fluid mb-5 " style="text-align: center">
+        <h1 class="display-2"><p class="title is-1 is-spaced text-info ">FIND YOUR DOCTOR USING SPECIALIZATION</p></h1>
+    </div>
+
+    <div class="container-fluid" id="mainContainerID">
+
+        <section class="row" th:with="items=${supplyItems}">
+            <th:block th:fragment="articles(items)">
+            <!-- itemVisualization Section Begin -->
+            <div th:replace="fragments :: itemVisualization"></div>
+            <!-- itemVisualization Section End -->
+            </th:block>
+        </section>
+    </div>
+</main>
+
+<!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+</body>
+</html>

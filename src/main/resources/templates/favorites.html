@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+
+<main>
+    <h1 th:text="${'Ciao ' + user.getFirstname() +'!'}"></h1>
+    <h2>My favorites</h2>
+
+    <div class="container-fluid" id="mainContainerID">
+        <section class="row" th:with="items=${user.getFavorites()}">
+            <th:block th:fragment="articles(items)">
+                <!-- itemVisualization Section Begin -->
+                <div th:replace="fragments :: itemVisualization"></div>
+                <!-- itemVisualization Section End -->
+            </th:block>
+        </section>
+    </div>
+</main>
+
+     <!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+</body>
+</html>

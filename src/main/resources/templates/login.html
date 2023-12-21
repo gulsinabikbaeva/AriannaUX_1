@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+
+<body>
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+<main>
+    <div class="container">
+
+    <h3>Login</h3>
+    <hr />
+    <form method="post">
+        <div class="mb-3 row">
+
+            <div class="col-sm-10">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+            </div>
+        </div>
+        <div class="mb-3 row">
+
+            <div class="col-sm-10">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" autocomplete="new-password">
+            </div>
+        </div>
+
+            <input class="btn btn-primary " type="submit" value="Login">
+            <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
+            <a th:href="@{/forgotPassword}" class="btn btn-light">Forgot password</a>
+
+
+    </form>
+    <hr>
+
+        <!-- white space -->  <div class="container"><div class="notification is-white"></div></div>
+        <!-- white space -->  <div class="container"><div class="notification is-white"></div></div>
+        <!-- white space -->  <div class="container"><div class="notification is-white"></div></div>
+        <!-- white space -->  <div class="container"><div class="notification is-white"></div></div>
+    </div>
+</main>
+
+<!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+
+</body>
+</html>

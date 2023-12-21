@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+<body>
+
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+    <div id="site">
+     <main>
+        <section>
+            <h2>Item 2</h2>
+            <article>article
+                <h3>Il mio secondo item (Lorenzo) <time datetime="2017-10-20 12:34">20/10/2017</time>, testo due tre quattro e resto del testo con i dettagli dell'item 2.</h3>
+            </article>
+        </section>
+     </main>
+     <aside>
+        <h2>La mia barra laterale aside vendocompro ITEMS <a href="http://www.supsi.ch">SUPSI</a></h2>
+     </aside>
+    </div>
+
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+
+<main>
+    <p> </p>
+
+    <!-- Shopping Cart Section Begin -->
+
+
+
+
+    <section th:with="items=${user.getCart()}">
+        <th:block th:fragment="articles(items)">
+            <article class="h-100" th:unless="${#lists.isEmpty(items)}" style="background-color: #FFFFFF;">
+
+
+                <div class="container-fluid mb-5"  style="text-align: center">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/specialization}">
+                            <img class="img-fluid " th:src="@{/images/cerca1.png}" alt=""> <h5 class="display-5"><p class="title is-1 is-spaced text-link">CHOOSE THE SERVICE</p></h5>
+                            <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/ok.jpg}" alt=""> </a>
+                        </a>
+
+                        <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/freccia1.png}" alt=""> </a>
+
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/cart}">
+                            <img class="img-fluid " th:src="@{/images/aggiungi1.png}" alt=""> <h5 class="display-5"><p class="title is-1 is-spaced text-link">CONFIRM THE LIST</p></h5>
+
+                        </a>
+
+                        <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/freccia1.png}" alt=""> </a>
+
+                        <a class="navbar-brand" th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}" th:href="@{/checkout}">
+                            <img class="img-fluid " th:src="@{/images/paga1.png}" alt=""> <h5 class="display-5"><p class="title is-1 is-spaced text-primary">PAY</p></h5>
+
+                        </a>
+
+                        <a class="navbar-brand" > <img class="img-fluid" th:src="@{/images/freccia1.png}" alt=""> </a>
+
+                        <a class="navbar-brand" >
+                            <img class="img-fluid " th:src="@{/images/appunta1.png}" alt=""> <h5 class="display-5"><p class="title is-1 is-spaced text-primary">WAIT FOR THE CONFIRMATION</p></h5>
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="container h-100 py-5">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-10">
+
+                            <div class="title">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4><b>Send the request</b></h4>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row border-top border-bottom" th:with="items=${user.getCart()}">
+                                <div class="row" style=" padding: 2vh 0;" th:each="item : ${items}" th:fragment="itemCard(item)">
+
+                                    <div class=" rounded-3 mb-4">
+                                        <div class="card-body p-4">
+                                            <div class="row d-flex justify-content-between align-items-center">
+                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                    <img class="img-fluid rounded-3"  th:src="@{'/item/'+${item.id}+'/image'}" alt="">
+
+                                                </div>
+                                                <div class="col-md-3 col-lg-3 col-xl-3" >
+                                                    <a th:href="@{'/item/'+${item.id}}"><span>
+                                                        <p class="lead fw-normal mb-2" th:text="${item.title}" >title</p>
+                                                        </span></a>
+
+
+                                                </div>
+                                                <div class="col-md-3 col-lg-3 col-xl-3" >
+                                                    <p class="lead fw-normal mb-2" th:if="${item.isAvailable()}" >Disponibile</p>
+                                                    <p class="lead fw-normal mb-2" th:unless="${item.isAvailable()}" >Non disponibile</p>
+
+                                                </div>
+                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                    <h5 class="mb-0"><a>&euro;<span class="price" th:text="${item.price}">xx</span></a></h5>
+                                                </div>
+                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                    <a th:href="@{'/cart/removeItemFromCart/'+${item.id}}" class="text-danger"><i class="icon-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></div>
+
+                            <div class="mb-4">
+                                <div class="card-body p-4 d-flex flex-row">
+                                    <div class="form-outline flex-fill ">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Discound code" aria-label="form1" id="discount">
+
+                                    </div>
+
+                                    <div class="col-md-1 col-lg-1 col-xl-1">
+                                        <button type="button" class="btn btn-outline-warning btn-lg">Apply</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <button type="button" class="btn btn-outline-warning btn-block btn-lg">
+                                        <a th:href="@{/checkout}">CHECKOUT</a>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="back-to-shop"><a th:href="@{/}" >&leftarrow; Back to Home</a></div>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+            <article class="col-md-12" th:if="${#lists.isEmpty(items)}" style="height:100px"><h2>Il carello è vuoto.</h2></article>
+        </th:block>
+    </section>
+
+
+    <!-- Shopping Cart Section End -->
+
+     </main>
+
+     <!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+<script>
+    $(document).ready(function(){
+
+        var quantitiy=0;
+        $('.quantity-right-plus').click(function(e){
+
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            $('#quantity').val(quantity + 1);
+
+
+            // Increment
+
+        });
+
+        $('.quantity-left-minus').click(function(e){
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            // Increment
+            if(quantity>0){
+                $('#quantity').val(quantity - 1);
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

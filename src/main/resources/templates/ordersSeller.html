@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Head Section Begin -->
+    <div th:replace="fragments :: head"></div>
+    <!-- Head Section End -->
+</head>
+
+
+<body class="goto-here">
+
+<!-- Nav Section Begin -->
+<div th:replace="fragments :: nav"></div>
+<!-- Nav Section End -->
+
+<!-- Section Section Begin -->
+<div th:replace="fragments :: sec2"></div>
+<!-- Section Section End -->
+
+
+<main>
+    <section>
+        <div class="container-fluid"><h2> </h2>
+            <p> Seller - My Orders</p>
+            <section class="row" th:with="items=${user.getOrders()}">
+                <th:block th:fragment="articles(items)">
+                    <!-- itemVisualization Section Begin -->
+                    <div class="col" style="text-align: left"><h3><a><span th:text="${item.getId()}">xxx</span></a></h3></div>
+                    <div class="col" style="text-align: left"><h3><a><span th:text="${item.getDate()}">xxx</span></a></h3></div>
+                    <div th:replace="fragments :: itemVisualization"></div>
+                    <!-- itemVisualization Section End -->
+                </th:block>
+            </section>
+
+        </div>
+    </section>
+</main>
+
+     <!-- Insta Section Begin -->
+<div th:replace="fragments :: insta"></div>
+<!-- Insta Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments :: footer"></div>
+<!-- Footer Section End -->
+
+</body>
+</html>
